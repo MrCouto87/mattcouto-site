@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 99%;
+  --foreground: 222 47% 11%;
+  --muted: 220 13% 96%;
+  --border: 220 13% 90%;
+  --accent: 222 84% 5%;
+}
+
+* {
+  @apply border-border;
+}
+
+html,
+body {
+  @apply bg-background text-foreground antialiased;
+}
+
+body {
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
