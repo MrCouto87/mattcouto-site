@@ -1,105 +1,73 @@
-import { CtaSection } from "@/components/ui/cta-section";
+"use client";
+
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ProjectCard } from "@/components/ui/project-card";
-import { Section } from "@/components/ui/section";
-import { projects } from "@/lib/projects";
 import { ProjectOrbit } from "@/components/home/project-orbit";
 
-const featuredProjects = projects.filter((project) => project.featured);
-
-const valuePillars = [
-  {
-    title: "Strategy",
-    items: ["Business diagnosis", "Offers", "Positioning", "Growth planning"],
-  },
-  {
-    title: "AI Systems",
-    items: ["AI workflows", "Automation", "Content systems", "Operational leverage"],
-  },
-  {
-    title: "Brand & Content",
-    items: ["Personal brand", "Social strategy", "Creative direction", "Content execution"],
-  },
+const usefulFor = [
+  "Diagnosing business chaos",
+  "Turning AI into real workflows",
+  "Building brand/content systems",
+  "Creating offers and growth plans",
 ];
 
 export default function HomePage() {
   return (
     <>
-      <section className="mx-auto grid w-full max-w-content gap-10 px-6 py-16 md:grid-cols-2 md:py-24">
-        <div className="max-w-xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[#556482]">
-            Builder. Strategist. AI Operator.
-          </p>
-          <h1 className="mt-4 text-4xl font-semibold leading-tight tracking-tight text-[#111827] md:text-6xl">
-            I build practical AI, sharper brands, and businesses that move.
-          </h1>
-          <p className="mt-6 text-base leading-relaxed text-[#33415c] md:text-lg">
-            I’m a founder, strategist, and operator based in Lisbon, working across AI, consulting,
-            creative systems, and business growth.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/consulting" size="lg">
-              Work with me
-            </Button>
-            <Button href="/projects" variant="secondary" size="lg">
-              Explore projects
-            </Button>
-          </div>
-        </div>
-        <div className="flex items-center">
-          <ProjectOrbit />
+      <section className="border-b border-[#1a2336] bg-[#06080f]">
+        <div className="mx-auto grid w-full max-w-content gap-10 px-6 py-16 md:grid-cols-2 md:py-24">
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: "easeOut" }} className="max-w-xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#85aefc]">MATT COUTO</p>
+            <h1 className="mt-5 text-4xl font-semibold leading-[1.08] tracking-tight text-[#f3f7ff] md:text-6xl">
+              Building the next version of work, brands, and business.
+            </h1>
+            <p className="mt-6 text-base leading-relaxed text-[#c2cde0] md:text-lg">
+              I’m a founder and strategist based in Lisbon, building AI products, advising businesses, and
+              turning messy ideas into clear systems that move.
+            </p>
+            <p className="mt-6 text-xs uppercase tracking-[0.14em] text-[#7ea6f6]">
+              CURRENTLY BUILDING: Mark AI · Vet My Business · MCS
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button href="/consulting" size="lg" className="hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-20px_rgba(89,152,255,0.8)]">
+                Work with me
+              </Button>
+              <Button
+                href="/projects"
+                variant="secondary"
+                size="lg"
+                className="border-[#2d3e5e] bg-[#0f1828] text-[#d9e5ff] hover:-translate-y-0.5 hover:bg-[#131f33]"
+              >
+                Explore the ecosystem
+              </Button>
+            </div>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.12, ease: "easeOut" }} className="flex items-center">
+            <ProjectOrbit />
+          </motion.div>
         </div>
       </section>
 
-      <Section
-        eyebrow="Currently Building"
-        title="Focused projects at the intersection of systems, strategy, and execution."
-      >
-        <div className="grid gap-5 md:grid-cols-2">
-          {featuredProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
+      <section className="border-b border-[#182235] bg-[#070a12]">
+        <div className="mx-auto w-full max-w-content px-6 py-10">
+          <p className="text-xs uppercase tracking-[0.18em] text-[#80a9ff]">What I’m Useful For</p>
+          <div className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            {usefulFor.map((item, index) => (
+              <motion.article
+                key={item}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="rounded-xl border border-[#1f2e4a] bg-[#0d1422] px-4 py-4 text-sm text-[#d9e4f9] transition duration-300 hover:-translate-y-0.5 hover:border-[#2f4974]"
+              >
+                {item}
+              </motion.article>
+            ))}
+          </div>
         </div>
-      </Section>
-
-      <Section
-        eyebrow="Where I Create Value"
-        title="Three pillars I use to unlock clarity and momentum."
-      >
-        <div className="grid gap-5 md:grid-cols-3">
-          {valuePillars.map((pillar) => (
-            <article key={pillar.title} className="rounded-2xl border border-[#d7dce8] bg-white p-6">
-              <h3 className="text-xl font-semibold tracking-tight text-[#161a23]">{pillar.title}</h3>
-              <ul className="mt-4 space-y-2 text-sm text-[#33415c]">
-                {pillar.items.map((item) => (
-                  <li key={item}>• {item}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      <Section eyebrow="Selected Projects" title="A broader look across ventures, systems, and experiments.">
-        <div className="grid auto-rows-[1fr] gap-5 md:grid-cols-6">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              className={index === 0 ? "md:col-span-3" : index === 1 ? "md:col-span-3" : "md:col-span-2"}
-            />
-          ))}
-        </div>
-      </Section>
-
-      <CtaSection
-        title="Need clarity on your business, brand, or AI strategy?"
-        description="If your business feels messy, unclear, under-leveraged, or behind on AI, I can help you find the signal and build the plan."
-        primaryLabel="Book a working session"
-        primaryHref="/contact"
-        secondaryLabel="See consulting offers"
-        secondaryHref="/consulting"
-      />
+      </section>
     </>
   );
 }
